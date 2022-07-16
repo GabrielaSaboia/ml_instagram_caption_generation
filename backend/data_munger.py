@@ -1,26 +1,29 @@
 import pandas as pd
 import numpy as np
 
-
-def process_data(file_path):
-    captions_csv = pd.read_csv(file_path)
-    captions_csv.drop(columns=['Sr No'], inplace=True)
-    for index, row in captions_csv.iterrows():
-        if row['Caption'] is np.nan:
-            captions_csv.drop(index=index, inplace=True)
-        elif len(row['Caption']) > 80 or '@' in row['Caption'] or '#' in row['Caption']:
-            captions_csv.drop(index=index, inplace=True)
-    captions_csv.reset_index(inplace=True)
-    captions_csv.drop(columns=['index'], inplace=True)
-    return captions_csv
+non_alpha_num = ['!', '@', '#', '$', '%', '&', '*', '"', "'", ".", ",", '?', ';', ":"]
 
 
-# Provide DataFrames as Parameters to the functions which you want to combine.
-def concat_files(*csv_df):
-    frames = list()
-    for df in csv_df:
-        frames.append(df)
-    data = pd.concat(frames)
-    data.reset_index(inplace=True)
-    data.drop(columns=['index'], inplace=True)
-    data.to_csv("./data/captions_csv.csv")
+# Provide file paths as parameter.
+# Returns a DataFrame with all the image locations and captions
+def process_data(*file_paths):
+    global non_alpha_num
+    df = {"image": list(),
+          "caption": list()}
+    for file_path in file_paths:
+        captions_csv = pd.read_csv(file_path, sep=',')
+        columns = list(captions_csv.columns)
+        if columns[0] == 'Sr No':
+            captions_csv.drop(columns=['Sr No'], inplace=True)
+        columns = list(captions_csv.columns)
+        for index, row in captions_csv.iterrows():
+            caption = row[columns[1]]
+            if caption is np.nan:
+                continue
+            elif all([char in caption for char in non_alpha_num]):
+                for char in non_alpha_num:
+                    if char in caption:
+                        caption.replace(char, "")
+            df['image'].append(row[columns[0]])
+            df['caption'].append(caption)
+    return pd.DataFrame(df)
