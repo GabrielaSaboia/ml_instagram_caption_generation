@@ -15,8 +15,11 @@ def process_data(file_path):
     return captions_csv
 
 
-def concat_files(csv1_df, csv2_df):
-    frames = [csv1_df, csv2_df]
+# Provide DataFrames as Parameters to the functions which you want to combine.
+def concat_files(*csv_df):
+    frames = list()
+    for df in csv_df:
+        frames.append(df)
     data = pd.concat(frames)
     data.reset_index(inplace=True)
     data.drop(columns=['index'], inplace=True)
