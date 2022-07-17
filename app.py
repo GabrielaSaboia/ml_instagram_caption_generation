@@ -43,8 +43,16 @@ def process():
         resp = jsonify({'message' : 'File was not a valid image'})
         resp.status_code = 400
         return resp
-
-
+        
+        
+prelim_names = ['Carla', 'Aly', 'Ivuoma']
+@app.route('/frontend/templates/results.html', methods=['GET', 'POST'])
+def hello_world():
+    names = request.form.getlist('handles[]')
+    if not names:
+        names = prelim_names
+    print('names to display', names)
+    return render_template('index.html', names=names)
 
 if __name__ == "__main__":
     app.run()

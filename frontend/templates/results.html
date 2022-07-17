@@ -1,24 +1,15 @@
-<DOCTYPE html>
-    <html>
-        <head>
-            <title>A.I. 
-                Generated 
-                Instagram Captions</title>
-                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-                <link rel="stylesheet" href="css/basic_layout.css">
-            
-        </head>
-        <body>
-            <h1>A.I. Generated Instagram Captions</h1>
-            <b>Here's your next caption</b>
-            <script type="text/javascript">
-                // get a HTMLCollection of elements in the page
-                let collection = document.getElementsByTagName("p");
-                // regular for loop
-                for (let i = 0; i < collection.length; i++) {
-                    console.log(collection[i]);
-                }
-            </script>
-        </body>
-    </html>
-    
+<form method="post">
+    <ul id="listWithHandle">
+      {% for name in names %}
+          <li>
+              <span class="my-handle">:+:</span>
+              <input type="hidden" name="handles[]" value="{{ name }}"/> {{ name }}
+          </li>
+      {% endfor %}
+    </ul>
+  
+  
+      <div>
+          <button class="btn btn-lg btn-primary">Submit</button>
+      </div>
+    </form>
