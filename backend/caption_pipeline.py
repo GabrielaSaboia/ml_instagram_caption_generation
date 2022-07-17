@@ -1,8 +1,10 @@
 import asyncio
 import time
 import pandas as pd
+from essential_generators import DocumentGenerator
 
 async def pipe(image):
-    res = {"caption": "foo"}
+    sentence = DocumentGenerator()
+    res = {"caption": sentence.sentence()}
     return res
 
