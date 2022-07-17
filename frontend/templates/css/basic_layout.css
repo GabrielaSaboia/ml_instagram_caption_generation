@@ -1,0 +1,17 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Gentium+Book+Plus&family=Lato&family=Montserrat:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gentium+Book+Plus&family=Lato&family=Montserrat:wght@200&family=Poppins:ital,wght@1,200&display=swap');
+
+body{
+    background-color: #f6efe6;
+    color: #38338b;
+    font-family: 'Lato', sans-serif;
+    text-align: center;
+    margin-top: 8em;
+}
+
+button{
+    background-color: #c76746;
+    color: #f6efe6;
+    font-family: 'Poppins', Arial;
+}
