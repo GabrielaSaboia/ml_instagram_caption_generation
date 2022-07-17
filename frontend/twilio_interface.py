@@ -1,6 +1,7 @@
 import os
 from twilio.rest import Client
 from flask import Flask, request
+import requests
 
 account_sid = os.environ['TWILIO_ACCOUNT_SID']
 auth_token = os.environ['TWILIO_AUTH_TOKEN']
@@ -32,6 +33,9 @@ def receive_image():
 
 
 def generate_caption(img_url) -> str:
+    img_data = requests.get(img_url).content
+    with open("image.jpg", "wb") as handler:
+        handler.write(img_data)
     pass
 
 
